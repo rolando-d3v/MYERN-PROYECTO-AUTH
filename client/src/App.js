@@ -1,4 +1,5 @@
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import ControlSeguridad from './pages/controlSeguridad/ControlSeguridad';
 import Login from './pages/login/Login';
 
 export default function App() {
@@ -7,6 +8,7 @@ export default function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path='/' component={Login}  />
+          <Route exact path='/control-seguro' component={ControlSeguridad}  />
         </Switch>
       </BrowserRouter>
     </div>

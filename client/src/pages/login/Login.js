@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
@@ -7,6 +7,17 @@ import * as GiIcons from "react-icons/gi";
 import "./login.scss";
 
 export default function Login() {
+  const [dataUser, setDataUser] = useState({
+    user: "",
+    password: "",
+  });
+
+  const { user, password } = dataUser;
+
+  const dataState = () => {
+    
+  };
+
   return (
     <div className="login">
       <header className="login__header">
@@ -36,11 +47,12 @@ export default function Login() {
         <form className="login__body__form">
           <div className="div-input">
             <label className="label-form">Identificacion en linea </label>
-            <input className="input-form" type="text" />
+            <input className="input-form" type="text" name="user" />
           </div>
+
           <div className="div-input">
             <label className="label-form">Contraseña </label>
-            <input className="input-form" type="text" />
+            <input className="input-form" type="text" name="password" />
           </div>
 
           <Link className="text-pass" to="">
@@ -48,7 +60,7 @@ export default function Login() {
           </Link>
           <button className="btn-form" type="submit">
             <IoIcons.IoIosUnlock />
-            <span>Registrarse</span>
+            <span>Iniciar sesion</span>
           </button>
         </form>
         {/* img de mobile */}
@@ -84,6 +96,7 @@ export default function Login() {
         </div>
       </section>
 
+      {/* //footer */}
       <footer className="login__footer">
         <span className="text-footer">
           <IoIcons.IoIosUnlock />
@@ -94,12 +107,12 @@ export default function Login() {
           <p>|</p>
           <span className="text-span">seguridad </span>
         </div>
-        <p className='text-end' >
+        <p className="text-end">
           Bank of America, miembro de NA FDIC. Prestamista de vivienda
-          equitativa {''}
-          <GiIcons.GiHouse/>
+          equitativa {""}
+          <GiIcons.GiHouse />
         </p>
-        <p className='text-end' >© 2021 Bank of America Corporation.</p>
+        <p className="text-end">© 2021 Bank of America Corporation.</p>
       </footer>
     </div>
   );
