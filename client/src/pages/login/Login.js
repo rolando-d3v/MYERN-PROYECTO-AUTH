@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
@@ -14,9 +14,23 @@ export default function Login() {
 
   const { user, password } = dataUser;
 
-  const dataState = () => {
-    
+  const dataState = (e) => {
+    setDataUser({
+      ...dataUser,
+      [e.target.name]: e.target.value,
+    });
   };
+
+
+  //poner disabled el input de password
+  useEffect(() => {
+    if (user.length >= 6) {
+      console.log(user.length);
+      document.getElementById("pass").disabled = false;
+    } else if (user.length < 6) {
+      document.getElementById("pass").disabled = true;
+    }
+  }, [user]);
 
   return (
     <div className="login">
@@ -47,12 +61,24 @@ export default function Login() {
         <form className="login__body__form">
           <div className="div-input">
             <label className="label-form">Identificacion en linea </label>
-            <input className="input-form" type="text" name="user" />
+            <input
+              className="input-form"
+              type="text"
+              name="user"
+              onChange={dataState}
+            />
           </div>
 
           <div className="div-input">
             <label className="label-form">Contraseña </label>
-            <input className="input-form" type="text" name="password" />
+            <input
+              id="pass"
+              disabled
+              className="input-form"
+              type="text"
+              name="password"
+              onChange={dataState}
+            />
           </div>
 
           <Link className="text-pass" to="">

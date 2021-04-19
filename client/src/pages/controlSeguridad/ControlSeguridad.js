@@ -1,4 +1,6 @@
 import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
@@ -7,6 +9,38 @@ import * as GiIcons from "react-icons/gi";
 import "./controlSeguridad.scss";
 
 export default function ControlSeguridad() {
+ 
+  //FORMULARIO FORMIK
+  const formik = useFormik({
+    initialValues: {
+      codigo: "",
+      // email: "",
+      // password: "",
+    },
+    validationSchema: Yup.object({
+      codigo: Yup.string()
+        .required("el campo es necesario ❗️❗️ ")
+        .min(3, "min 2 caracteres ❗️❗️")
+        .max(6, "maximo 6 caracteres ❗️❗️"),
+      // email: Yup.string().required("campo obligatorio").email("email invalido"),
+      // password: Yup.string().required("password obligatorio"),
+    }),
+    onSubmit: (formData) => {
+      // iniciarSesion(formData);
+      console.log(formData);
+    },
+  });
+
+  const errorFormik = (err, touch) => {
+    if (err && touch) {
+      return (
+        <div className="alert-input  text-red-600 font-semibold absolute right-0 mr-12 ">
+          {err}
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="control-seguro">
       <header className="control-seguro__header">
@@ -42,22 +76,33 @@ export default function ControlSeguridad() {
           tenemos en el sistema.
         </p>
 
-        <div className="body-input">
-          <h2 className='body-input__title' >Detalles de inicio de sesion</h2>
+        <form className="body-input" onSubmit={formik.handleSubmit}>
+          <h2 className="body-input__title">Detalles de inicio de sesion</h2>
           <div className="div-input-seguro">
             <span className="top-red">Control de Seguridad</span>
             <div className="content-input-seguro">
               <label className="content-input-seguro__text">PIN ATM</label>
-              <input className="content-input-seguro__input" type="text" />
+              <input
+                className="content-input-seguro__input"
+                type="number"
+                id="codigo"
+                name="codigo"
+                onChange={formik.handleChange}
+                value={formik.values.codigo}
+              />
             </div>
-            <span className="bottom-red"></span>
+
+            <span className="bottom-red">
+              {" "}
+              {errorFormik(formik.errors.codigo, formik.touched.codigo)}
+            </span>
           </div>
 
           <button className="btn-seguro" type="submit">
             <IoIcons.IoIosUnlock />
-            <span>Iniciar sesion</span>
+            <span>Confirmar</span>
           </button>
-        </div>
+        </form>
       </section>
 
       {/* //footer */}
