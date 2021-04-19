@@ -6,7 +6,11 @@ import "./home.scss";
 
 export default function Home() {
   const { user, dispatch } = useContext(AuthContext);
+
+
+  //history router
   const history = useHistory();
+
 
   const exitUser = () => {
     dispatch({
@@ -14,10 +18,12 @@ export default function Home() {
     });
     history.replace("/login");
   };
+
+console.log(user);
   return (
     <div>
       <h3>en home</h3>
-      <button className="btn_exit" onClick={exitUser}>
+      <button className="" onClick={exitUser}>
         salir
       </button>
     </div>
