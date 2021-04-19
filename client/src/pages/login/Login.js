@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import AuthContext from "../../context/auth/authContext";
+import { types } from "../../context/auth/types";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
@@ -7,6 +9,8 @@ import * as GiIcons from "react-icons/gi";
 import "./login.scss";
 
 export default function Login() {
+  const { dispatch } = useContext(AuthContext);
+
   const [dataUser, setDataUser] = useState({
     user: "",
     password: "",
@@ -31,6 +35,18 @@ export default function Login() {
       document.getElementById("pass").disabled = true;
     }
   }, [user]);
+
+
+
+  const loginUser = () => {
+    dispatch({
+      type: types.LOGIN,
+      payload: {
+        name: "Rolando",
+      },
+    });
+    // history.replace(lastpath);
+  };
 
   return (
     <div className="login">
@@ -88,6 +104,9 @@ export default function Login() {
             <IoIcons.IoIosUnlock />
             <span>Iniciar sesion</span>
           </button>
+          <button className="btn_login" onClick={loginUser}>
+              Siguiente
+            </button>
         </form>
         {/* img de mobile */}
         <div className="login__body__body-medio">
