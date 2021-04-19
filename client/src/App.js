@@ -1,15 +1,16 @@
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import ControlSeguridad from './pages/controlSeguridad/ControlSeguridad';
-import Login from './pages/login/Login';
+import {BrowserRouter} from 'react-router-dom';
+import AppRouter from './routers/AppRouter';
+
 
 export default function App() {
   return (
     <div className="app">
       <BrowserRouter>
-        <Switch>
+      <AppRouter/>
+        {/* <Switch>
           <Route exact path='/' component={Login}  />
           <Route exact path='/control-seguro' component={ControlSeguridad}  />
-        </Switch>
+        </Switch> */}
       </BrowserRouter>
     </div>
   );
