@@ -6,6 +6,7 @@ import cors from "cors";
 
 //import routes
 import registroRoutes from "./api/registro/registro.routes";
+import authRoutes from "./api/auth/auth.routes";
 
 
 
@@ -27,7 +28,8 @@ createConnection()
 
     
     //routes
-    app.use("/user", registroRoutes);
+    app.use("/registro", registroRoutes);
+    app.use("/auth", authRoutes);
   })
   .catch((error) => {
     console.log({ message: "Error: Connectionn", error });

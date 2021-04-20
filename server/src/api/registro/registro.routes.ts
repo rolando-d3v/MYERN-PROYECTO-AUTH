@@ -1,9 +1,14 @@
 import { Router } from "express";
+
+//controllers
 import * as CtrlRegistro from "./registro.controller";
 
-const router = Router();
+//middlewares
+import {authToken} from "../../middleware/authToken";
 
-router.get("/", CtrlRegistro.getRegistros);
+
+const router = Router();
+router.get("/", authToken, CtrlRegistro.getRegistros);
 router.post("/", CtrlRegistro.createRegistro);
 router.delete("/:id", CtrlRegistro.deleteRegistro);
 
