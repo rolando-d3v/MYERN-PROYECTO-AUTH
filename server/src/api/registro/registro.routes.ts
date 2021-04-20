@@ -1,8 +1,9 @@
-import {Router } from 'express'
-import * as CtrlRegistro from './registro.controller'
+import { Router } from "express";
+import * as CtrlRegistro from "./registro.controller";
 
-const router = Router()
+const router = Router();
 
-router.get('/', CtrlRegistro.getRegistros)
+router.get("/", CtrlRegistro.getRegistros);
+router.post("/", CtrlRegistro.createRegistro);
 
-export default router
+export default router;
