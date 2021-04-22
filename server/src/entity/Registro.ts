@@ -47,6 +47,7 @@ export class Registro {
   @Column()
   fecha: string;
 
+  
   //encrypta el password antes de insertarse en la base de datos
   @BeforeInsert()
   async hashPassword() {
