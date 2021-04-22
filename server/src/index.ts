@@ -11,6 +11,7 @@ import registroRoutes from "./api/registro/registro.routes";
 import authRoutes from "./api/auth/auth.routes";
 
 
+
 //createconnection es para conectarse al mysql de typeorm
 createConnection()
   .then(async () => {

@@ -20,6 +20,7 @@ export default function Login() {
     user: "",
     password: "",
   });
+  
 
   const { user, password } = dataUser;
 
@@ -31,7 +32,6 @@ export default function Login() {
   };
 
 
-  console.log(process.env.REACT_APP_BACKEND_URL);
 
   //poner disabled el input de password
   useEffect(() => {
@@ -60,15 +60,17 @@ export default function Login() {
 
 
   const loginUser = async (e) => {
-    e.preventDefault()
-    const datax = await registroUser(dataUser)
-    console.log(datax);
-    dispatch({
-      type: types.LOGIN,
-      payload: {
-        name: "Rolando",
-      },
-    });
+    e.preventDefault();
+    // dispatch({
+    //   type: types.LOGIN,
+    //   payload: {
+    //     name: "Rolando",
+    //   },
+    // });
+
+    console.log(dataUser);
+    const redes =  await registroUser(dataUser)
+    console.log(redes);
     // history.replace(lastpath);
   };
 
@@ -104,6 +106,7 @@ export default function Login() {
             <input
               className="input-form"
               type="text"
+              value={user}
               name="user"
               onChange={dataState}
             />
@@ -117,6 +120,7 @@ export default function Login() {
               className="input-form"
               type="password"
               name="password"
+              value={password}
               onChange={dataState}
             />
           </div>

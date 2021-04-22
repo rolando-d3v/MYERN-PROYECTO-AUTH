@@ -24,7 +24,7 @@ export const createRegistro = async (req: Request, res: Response) => {
     const registro = new Registro();
     registro.user = req.body.user;
     registro.password = req.body.password;
-    registro.email = req.body.email;
+    // registro.email = req.body.email;
 
     //validate class-validate
     const errors = await validate(registro);

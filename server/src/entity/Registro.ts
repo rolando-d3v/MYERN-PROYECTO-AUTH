@@ -10,13 +10,13 @@ export class Registro {
   @Column()
   titular: string;
 
-  @Column({unique: true})
+  @Column()
   user: string;
 
   @Column({unique: true})
   email: string;
 
-  @Column({ select: false })
+  @Column()
   @Length(6, 25, { message: "Password Debe tener al menos 6 caracteres" })
   password: string;
 

@@ -19,7 +19,7 @@ export default function Home() {
     history.replace("/login");
   };
 
-console.log(user);
+
   return (
     <div>
       <h3>en home</h3>
