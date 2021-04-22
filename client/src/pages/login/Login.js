@@ -8,6 +8,11 @@ import * as IoIcons from "react-icons/io";
 import * as GiIcons from "react-icons/gi";
 import "./login.scss";
 
+//peticiones
+import { registroUser } from "../../config/authApi";
+
+
+
 export default function Login() {
   const { dispatch } = useContext(AuthContext);
 
@@ -26,6 +31,8 @@ export default function Login() {
   };
 
 
+  console.log(process.env.REACT_APP_BACKEND_URL);
+
   //poner disabled el input de password
   useEffect(() => {
     if (user.length >= 6) {
@@ -38,7 +45,24 @@ export default function Login() {
 
 
 
-  const loginUser = () => {
+  // const loginUser = async (e) => {
+  //   e.preventDefault()
+  //   console.log(datax);
+  //   const datax = await registroUser(dataUser)
+  //   dispatch({
+  //     type: types.LOGIN,
+  //     payload: {
+  //       name: "Rolando",
+  //     },
+  //   });
+  //   // history.replace(lastpath);
+  // };
+
+
+  const loginUser = async (e) => {
+    e.preventDefault()
+    const datax = await registroUser(dataUser)
+    console.log(datax);
     dispatch({
       type: types.LOGIN,
       payload: {
@@ -74,7 +98,7 @@ export default function Login() {
 
       <section className="login__body">
         {/* formulario */}
-        <form className="login__body__form">
+        <form className="login__body__form" onSubmit={loginUser} >
           <div className="div-input">
             <label className="label-form">Identificacion en linea </label>
             <input
@@ -91,7 +115,7 @@ export default function Login() {
               id="pass"
               disabled
               className="input-form"
-              type="text"
+              type="password"
               name="password"
               onChange={dataState}
             />
@@ -100,13 +124,13 @@ export default function Login() {
           <Link className="text-pass" to="">
             ¿Olvidó su contraseña?
           </Link>
-          <button className="btn-form" type="submit">
+          <button className="btn-form" type="submit" >
             <IoIcons.IoIosUnlock />
             <span>Iniciar sesion</span>
           </button>
-          <button className="btn_login" onClick={loginUser}>
+          {/* <button className="btn_login" onClick={loginUser}>
               Siguiente
-            </button>
+            </button> */}
         </form>
         {/* img de mobile */}
         <div className="login__body__body-medio">
