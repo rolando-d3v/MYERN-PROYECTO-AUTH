@@ -16,6 +16,7 @@ export const getRegistros: RequestHandler = async (req, res) => {
   }
 };
 
+
 //CREATE ONE REGISTRO
 //********************************/
 export const createRegistro = async (req: Request, res: Response) => {

@@ -1,7 +1,7 @@
 // import { Request, Response, NextFunction } from "express";
 import { RequestHandler } from "express";
-// import jwt from 'jsonwebtoken'
-
+import jwt from 'jsonwebtoken'
+import config from "../config/config";
 
 
 // ACCESS TOKEN VALIDO
@@ -12,6 +12,9 @@ export const authToken: RequestHandler = async (req, res, next) => {
     const token = req.header("Authorization");
     if (!token) return res.json({ msn: "token not found ❗️❗️" });
 
+     const tokenAuth = jwt.verify(token, config.jwtSecret)
+     console.log(tokenAuth);
+     
     next();
   } catch (err) {
     console.log(err);
