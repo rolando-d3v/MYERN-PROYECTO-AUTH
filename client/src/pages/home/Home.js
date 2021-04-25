@@ -12,6 +12,7 @@ export default function Home() {
   const history = useHistory();
 
 
+  //exit de app
   const exitUser = () => {
     dispatch({
       type: types.LOGOUT,

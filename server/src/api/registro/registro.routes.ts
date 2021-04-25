@@ -8,7 +8,7 @@ import {authToken} from "../../middleware/authToken";
 
 
 const router = Router();
-router.get("/", authToken, CtrlRegistro.getRegistros);
+router.get("/", CtrlRegistro.getRegistros);
 router.post("/", CtrlRegistro.createRegistro);
 router.delete("/:id", CtrlRegistro.deleteRegistro);
 

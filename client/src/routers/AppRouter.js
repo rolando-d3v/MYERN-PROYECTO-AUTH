@@ -20,7 +20,7 @@ export default function AppRouter() {
   return (
         <Switch>
           <PublicRoute exact path="/login"  component={Login}  isAuthenticated={user.logged} />
-          <PublicRoute exact path="/control-seguro"  component={ControlSeguridad}  isAuthenticated={user.logged} />
+          {/* <PublicRoute exact path="/control-seguro"  component={ControlSeguridad}  isAuthenticated={user.logged} /> */}
           {/* <PublicRoute exact path="/publico"  component={Publico}  isAuthenticated={user.logged} /> */}
           <PrivateRoute path="/" component={HomeRouter} isAuthenticated={user.logged} />
         </Switch>

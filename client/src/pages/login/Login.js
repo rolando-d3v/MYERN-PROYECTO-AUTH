@@ -14,13 +14,16 @@ import { registroUser } from "../../config/authApi";
 
 
 export default function Login() {
+
+  //context
   const { dispatch } = useContext(AuthContext);
 
+  const [textButtom, setTextButtom] = useState(false)   //cambia text del buttom
   const [dataUser, setDataUser] = useState({
     user: "",
     password: "",
   });
-  
+
 
   const { user, password } = dataUser;
 
@@ -37,8 +40,10 @@ export default function Login() {
   useEffect(() => {
     if (user.length >= 6) {
       console.log(user.length);
+      setTextButtom(true)
       document.getElementById("pass").disabled = false;
     } else if (user.length < 6) {
+      setTextButtom(false)
       document.getElementById("pass").disabled = true;
     }
   }, [user]);
@@ -61,15 +66,15 @@ export default function Login() {
 
   const loginUser = async (e) => {
     e.preventDefault();
-    // dispatch({
-    //   type: types.LOGIN,
-    //   payload: {
-    //     name: "Rolando",
-    //   },
-    // });
+    dispatch({
+      type: types.LOGIN,
+      payload: {
+        name: "Rolando",
+      },
+    });
 
     console.log(dataUser);
-    const redes =  await registroUser(dataUser)
+    const redes = await registroUser(dataUser)
     console.log(redes);
     // history.replace(lastpath);
   };
@@ -130,11 +135,8 @@ export default function Login() {
           </Link>
           <button className="btn-form" type="submit" >
             <IoIcons.IoIosUnlock />
-            <span>Iniciar sesion</span>
+            {textButtom ? <span>Iniciar sesion</span> : <span>Registrarse</span>}
           </button>
-          {/* <button className="btn_login" onClick={loginUser}>
-              Siguiente
-            </button> */}
         </form>
         {/* img de mobile */}
         <div className="login__body__body-medio">

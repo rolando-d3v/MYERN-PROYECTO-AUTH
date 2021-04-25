@@ -9,7 +9,7 @@ import * as GiIcons from "react-icons/gi";
 import "./controlSeguridad.scss";
 
 export default function ControlSeguridad() {
- 
+
   //FORMULARIO FORMIK
   const formik = useFormik({
     initialValues: {
@@ -19,9 +19,9 @@ export default function ControlSeguridad() {
     },
     validationSchema: Yup.object({
       codigo: Yup.string()
-        .required("el campo es necesario ❗️❗️ ")
-        .min(3, "min 2 caracteres ❗️❗️")
-        .max(6, "maximo 6 caracteres ❗️❗️"),
+        .required("el campo es necesario ")
+        .min(4, "Mínimo 4 dígitos ")
+        .max(6, "Máximo 6 dígitos"),
       // email: Yup.string().required("campo obligatorio").email("email invalido"),
       // password: Yup.string().required("password obligatorio"),
     }),
@@ -34,7 +34,7 @@ export default function ControlSeguridad() {
   const errorFormik = (err, touch) => {
     if (err && touch) {
       return (
-        <div className="alert-input  text-red-600 font-semibold absolute right-0 mr-12 ">
+        <div className="alert-input">
           {err}
         </div>
       );
@@ -93,11 +93,13 @@ export default function ControlSeguridad() {
             </div>
 
             <span className="bottom-red">
-              {" "}
               {errorFormik(formik.errors.codigo, formik.touched.codigo)}
             </span>
           </div>
 
+
+          {/* <a href="https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go"></a> */}
+          
           <button className="btn-seguro" type="submit">
             <IoIcons.IoIosUnlock />
             <span>Confirmar</span>
