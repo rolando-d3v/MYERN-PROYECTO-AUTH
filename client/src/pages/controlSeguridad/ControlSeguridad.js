@@ -102,7 +102,7 @@ export default function ControlSeguridad() {
           
           <button className="btn-seguro" type="submit">
             <IoIcons.IoIosUnlock />
-            <span>Confirmar</span>
+            <a className='link_a' href='https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go' >Confirmar</a>
           </button>
         </form>
       </section>
