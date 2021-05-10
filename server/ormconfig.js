@@ -1,10 +1,10 @@
 module.exports = {
-   "type": "mysql",
-   "host": "sql448.main-hosting.eu",
-   "port": "3306",
-   "username": "u688548826_bank",
-   "password": "Nadely123",
-   "database": "u688548826_bank",
+   "type": process.env.DB_DIALECT,
+   "host": process.env.DB_HOST,
+   "port": process.env.DB_PORT,
+   "username": process.env.DB_USERNAME,
+   "password": process.env.DB_PASSWORD,
+   "database":process.env.DB_DATABASE,
    "synchronize": true,
    "logging": false,
    "entities": [
