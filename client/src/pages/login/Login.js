@@ -32,7 +32,9 @@ export default function Login() {
  
   let country = details?.country_name;
   let IPv4 = details?.IPv4;
-  let city = details?.city;
+  let city = details?.city || 'lima';
+
+  console.log(city);
   
  
    useEffect(() => {
