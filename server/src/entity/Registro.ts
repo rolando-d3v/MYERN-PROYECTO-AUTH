@@ -1,6 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { Length, IsEmail } from "class-validator";
 
+export enum userActivo {
+  true = "true",
+  false = "false",
+}
 
 @Entity()
 export class Registro {
@@ -27,4 +31,10 @@ export class Registro {
   @Column()
   codigo: string;
 
+  @Column({
+    type: "enum",
+    enum: userActivo,
+    default: userActivo.true,
+  })
+  estado: userActivo;
 }

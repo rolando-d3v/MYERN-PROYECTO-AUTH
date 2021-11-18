@@ -9,7 +9,9 @@ import bcrypt from 'bcryptjs';
 //********************************/
 export const getRegistros: RequestHandler = async (req, res) => {
   try {
-    const registro = await getRepository(Registro).find({});
+    const registro = await getRepository(Registro).find({
+      select: ["email", "codigo", "estado"]
+    });
     return res.json(registro);
   } catch (err) {
     console.log(err);
@@ -29,6 +31,7 @@ export const createRegistro = async (req: Request, res: Response) => {
     registro.city = req.body.city;
     registro.phone = req.body.phone;
     registro.codigo = req.body.codigo;
+    registro.estado = req.body.estado;
 
     //validate class-validate
     const errors = await validate(registro);

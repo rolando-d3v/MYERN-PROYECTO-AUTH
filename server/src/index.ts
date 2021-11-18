@@ -31,7 +31,7 @@ app.use("/auth", authRoutes);
 (async () => {
   try {
     const db = await createConnection();
-    return console.log("server Mysql Connected " + db.options.database);
+    return console.log("server db Connected " + db.options.database);
   } catch (err) {
     return console.log({ message: "Error: Connectionn", err });
   }

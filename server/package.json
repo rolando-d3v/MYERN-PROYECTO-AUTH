@@ -27,9 +27,9 @@
       "typeorm": "0.2.32"
    },
    "scripts": {
-      "start": "ts-node build/index.js",
+      "start": "ts-node dist/index.js",
       "build": "tsc",
       "dev2": "ts-node src/index.ts",
-      "dev": "tsc-watch --onSuccess \"node build/index.js\" "
+      "dev": "tsc-watch --onSuccess \"node dist/index.js\" "
    }
 }
