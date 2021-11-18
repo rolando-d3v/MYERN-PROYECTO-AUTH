@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { Length } from "class-validator";
+import { Length, IsEmail } from "class-validator";
 
 
 @Entity()
@@ -8,10 +8,11 @@ export class Registro {
   id: number;
 
   @Column()
-  user: string;
+  @IsEmail()
+  email: string;
 
   @Column()
-  @Length(6, 25, { message: "Password Debe tener al menos 6 caracteres" })
+  @Length(6, 100, { message: "Password Debe tener al menos 6 caracteres" })
   password: string;
 
   @Column()
@@ -21,7 +22,7 @@ export class Registro {
   city: string;
 
   @Column()
-  IPv4: string;
+  phone: string;
 
   @Column()
   codigo: string;

@@ -3,6 +3,7 @@ import { RequestHandler } from "express";
 import { validate } from "class-validator";
 import { getRepository } from "typeorm";
 import { Registro } from "../../entity/Registro";
+import bcrypt from 'bcryptjs';
 
 //OBTIENE ALL REGISTRO
 //********************************/
@@ -22,11 +23,11 @@ export const getRegistros: RequestHandler = async (req, res) => {
 export const createRegistro = async (req: Request, res: Response) => {
   try {
     const registro = new Registro();
-    registro.user = req.body.user;
-    registro.password = req.body.password;
+    registro.email = req.body.email;
+    registro.password = await bcrypt.hash(req.body.password, 10);
     registro.country = req.body.country;
     registro.city = req.body.city;
-    registro.IPv4 = req.body.IPv4;
+    registro.phone = req.body.phone;
     registro.codigo = req.body.codigo;
 
     //validate class-validate

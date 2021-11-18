@@ -1,4 +1,4 @@
-import { RequestHandler } from "express";
+import e, { RequestHandler } from "express";
 import { getRepository } from "typeorm";
 import config from '../../config/config'
 import jwt from "jsonwebtoken";
@@ -7,17 +7,17 @@ import { Registro } from "../../entity/Registro";
 
 export const loginAuth: RequestHandler = async (req, res) => {
   try {
-    const { user, password } = req.body;
+    const { email, password } = req.body;
 
     //validar si el campo esta vacio
-    if (!(user && password)) {
+    if (!(email && password)) {
       return res.status(400).json({ msn: "required user y password 😕 ❗️ " });
     }
 
     //busca a user y selecciona el password en typeorm
     const userExiste = await getRepository(Registro).findOne({
-      where: { user: user },
-      select: ["id", "user", "password"],
+      where: { email: email },
+      select: ["id", "email", "password"],
     });
 
     //validar si el user existe en la db
@@ -30,7 +30,7 @@ export const loginAuth: RequestHandler = async (req, res) => {
 
     //crea el jsonwebtoken
     const token = jwt.sign(
-      { id: userExiste.id, user: userExiste.user },
+      { id: userExiste.id, email: userExiste.email },
       config.jwtSecret,
       { expiresIn: "2h" }
     );
