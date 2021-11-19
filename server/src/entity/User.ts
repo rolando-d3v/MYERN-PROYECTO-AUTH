@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 import { Length, IsEmail } from "class-validator";
 
+///enum
 export enum userActivo {
   true = "true",
   false = "false",
