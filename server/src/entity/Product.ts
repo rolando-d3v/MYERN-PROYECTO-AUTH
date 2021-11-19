@@ -5,9 +5,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
-
-
 import { Length } from "class-validator";
+
 
 export enum estadoActivo {
   true = "true",
@@ -27,6 +26,9 @@ export class Product {
 
   @Column()
   precio: number;
+
+  @Column()
+  stock: number;
 
   @Column({
     type: "enum",

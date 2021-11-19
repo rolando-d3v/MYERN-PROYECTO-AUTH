@@ -21,3 +21,6 @@ export const authToken: RequestHandler = async (req, res, next) => {
     return res.status(400).json({ msn: "Error server", err });
   }
 };
+
+
+
