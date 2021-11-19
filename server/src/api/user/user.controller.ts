@@ -2,17 +2,17 @@ import { Request, Response } from "express";
 import { RequestHandler } from "express";
 import { validate } from "class-validator";
 import { getRepository } from "typeorm";
-import { Registro } from "../../entity/Registro";
+import { User } from "../../entity/User";
 import bcrypt from 'bcryptjs';
 
 //OBTIENE ALL REGISTRO
 //********************************/
-export const getRegistros: RequestHandler = async (req, res) => {
+export const getUsers: RequestHandler = async (req, res) => {
   try {
-    const registro = await getRepository(Registro).find({
+    const user = await getRepository(User).find({
       select: ["email", "codigo", "estado"]
     });
-    return res.json(registro);
+    return res.json(user);
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msn: "Error Server 😕 ❗️❗️" });
@@ -22,23 +22,24 @@ export const getRegistros: RequestHandler = async (req, res) => {
 
 //CREATE ONE REGISTRO
 //********************************/
-export const createRegistro = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: Response) => {
   try {
-    const registro = new Registro();
-    registro.email = req.body.email;
-    registro.password = await bcrypt.hash(req.body.password, 10);
-    registro.country = req.body.country;
-    registro.city = req.body.city;
-    registro.phone = req.body.phone;
-    registro.codigo = req.body.codigo;
-    registro.estado = req.body.estado;
+    const user = new User();
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.password = await bcrypt.hash(req.body.password, 10);
+    user.country = req.body.country;
+    user.city = req.body.city;
+    user.phone = req.body.phone;
+    user.codigo = req.body.codigo;
+    user.estado = req.body.estado;
 
     //validate class-validate
-    const errors = await validate(registro);
+    const errors = await validate(user);
     if (errors.length > 0) return res.status(400).json(errors);
 
     //save registro
-    await getRepository(Registro).save(registro);
+    await getRepository(User).save(user);
     return res.json({ msn: "Registro created success 😃 ✔️" });
   } catch (err) {
     console.log(err);
@@ -50,20 +51,20 @@ export const createRegistro = async (req: Request, res: Response) => {
 
 //DELETED ONE REGISTRO
 //********************************/
-export const deleteRegistro = async (
+export const deleteUser = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   try {
     //si existe el id del registro
-    const registroId = await getRepository(Registro).findOne(req.params.id);
-    if (!registroId) {
+    const userId = await getRepository(User).findOne(req.params.id);
+    if (!userId) {
       return res.status(400).json({ msn: "Registro not found ❗️" });
     }
 
     // deleted un registro
-    const registro = await getRepository(Registro).delete(req.params.id);
-    return res.json({ msn: "Registro deleted success  ✔️", registro });
+    const user = await getRepository(User).delete(req.params.id);
+    return res.json({ msn: "Registro deleted success  ✔️", user });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ msn: "Error: server 😕 ❗️❗️", err });

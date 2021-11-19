@@ -7,11 +7,14 @@ export enum userActivo {
 }
 
 @Entity()
-export class Registro {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
+  name: string;
+
+  @Column({ unique: true, nullable: true })
   @IsEmail()
   email: string;
 

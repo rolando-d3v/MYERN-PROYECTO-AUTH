@@ -44,7 +44,7 @@ var typeorm_1 = require("typeorm");
 var config_1 = __importDefault(require("../../config/config"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
-var Registro_1 = require("../../entity/Registro");
+var User_1 = require("../../entity/User");
 var loginAuth = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var _a, email, password, userExiste, userPass, token, err_1;
     return __generator(this, function (_b) {
@@ -56,7 +56,7 @@ var loginAuth = function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 if (!(email && password)) {
                     return [2 /*return*/, res.status(400).json({ msn: "required user y password 😕 ❗️ " })];
                 }
-                return [4 /*yield*/, typeorm_1.getRepository(Registro_1.Registro).findOne({
+                return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne({
                         where: { email: email },
                         select: ["id", "email", "password"],
                     })];

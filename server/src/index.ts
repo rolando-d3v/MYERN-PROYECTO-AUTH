@@ -6,7 +6,7 @@ import cors from "cors";
 import config from "./config/config";
 
 //import routes
-import registroRoutes from "./api/registro/registro.routes";
+import userRoutes from "./api/user/user.routes";
 import authRoutes from "./api/auth/auth.routes";
 
 //app server
@@ -23,9 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //routes
-app.use("/registro", registroRoutes);
+app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
-
 
 //createconnection es para conectarse al mysql de typeorm
 (async () => {
@@ -36,6 +35,7 @@ app.use("/auth", authRoutes);
     return console.log({ message: "Error: Connectionn", err });
   }
 })();
+
 
 
 

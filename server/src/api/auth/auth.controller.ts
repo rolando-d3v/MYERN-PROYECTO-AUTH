@@ -3,7 +3,7 @@ import { getRepository } from "typeorm";
 import config from '../../config/config'
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import { Registro } from "../../entity/Registro";
+import { User } from "../../entity/User";
 
 export const loginAuth: RequestHandler = async (req, res) => {
   try {
@@ -15,7 +15,7 @@ export const loginAuth: RequestHandler = async (req, res) => {
     }
 
     //busca a user y selecciona el password en typeorm
-    const userExiste = await getRepository(Registro).findOne({
+    const userExiste = await getRepository(User).findOne({
       where: { email: email },
       select: ["id", "email", "password"],
     });

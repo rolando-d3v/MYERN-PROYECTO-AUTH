@@ -46,7 +46,7 @@ var morgan_1 = __importDefault(require("morgan"));
 var cors_1 = __importDefault(require("cors"));
 var config_1 = __importDefault(require("./config/config"));
 //import routes
-var registro_routes_1 = __importDefault(require("./api/registro/registro.routes"));
+var user_routes_1 = __importDefault(require("./api/user/user.routes"));
 var auth_routes_1 = __importDefault(require("./api/auth/auth.routes"));
 //app server
 var app = express_1.default();
@@ -60,7 +60,7 @@ app.use(morgan_1.default("dev"));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 //routes
-app.use("/registro", registro_routes_1.default);
+app.use("/user", user_routes_1.default);
 app.use("/auth", auth_routes_1.default);
 //createconnection es para conectarse al mysql de typeorm
 (function () { return __awaiter(void 0, void 0, void 0, function () {
