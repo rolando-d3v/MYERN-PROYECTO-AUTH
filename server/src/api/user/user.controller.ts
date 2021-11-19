@@ -3,14 +3,14 @@ import { RequestHandler } from "express";
 import { validate } from "class-validator";
 import { getRepository } from "typeorm";
 import { User } from "../../entity/User";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
 
 //OBTIENE ALL REGISTRO
 //********************************/
 export const getUsers: RequestHandler = async (req, res) => {
   try {
     const user = await getRepository(User).find({
-      select: ["email", "codigo", "estado"]
+      select: ["email", "codigo", "estado"],
     });
     return res.json(user);
   } catch (err) {
@@ -19,20 +19,22 @@ export const getUsers: RequestHandler = async (req, res) => {
   }
 };
 
-
 //CREATE ONE REGISTRO
 //********************************/
 export const createUser = async (req: Request, res: Response) => {
+  const { name, email, password, country, city, phone, codigo, estado } =
+    req.body;
+
   try {
     const user = new User();
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.password = await bcrypt.hash(req.body.password, 10);
-    user.country = req.body.country;
-    user.city = req.body.city;
-    user.phone = req.body.phone;
-    user.codigo = req.body.codigo;
-    user.estado = req.body.estado;
+    user.name = name;
+    user.email = email;
+    user.password = await bcrypt.hash(password, 10);
+    user.country = country;
+    user.city = city;
+    user.phone = phone;
+    user.codigo = codigo;
+    user.estado = estado;
 
     //validate class-validate
     const errors = await validate(user);
@@ -46,8 +48,6 @@ export const createUser = async (req: Request, res: Response) => {
     return res.status(500).json({ msn: "Error: server 😕 ❗️❗️", err });
   }
 };
-
-
 
 //DELETED ONE REGISTRO
 //********************************/
