@@ -30,6 +30,7 @@ app.use("/auth", authRoutes);
 (async () => {
   try {
     const db = await createConnection();
+    await db.runMigrations()
     return console.log("server db Connected " + db.options.database);
   } catch (err) {
     return console.log({ message: "Error: Connectionn", err });

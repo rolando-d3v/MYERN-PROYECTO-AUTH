@@ -7,9 +7,11 @@ module.exports = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  synchronize: true,
-  logging: false,
+  // synchronize: true,
+  synchronize: false,
+  // logging: false,
   entities: [ruta + "/entity/**/*{.ts,.js}"],
+  migrationsTableName: "custom_migration_table",
   migrations: [ruta + "/migration/**/*{.ts,.js}"],
   subscribers: [ruta + "/subscriber/**/*{.ts,.js}"],
   cli: {
