@@ -50,6 +50,5 @@ export class User {
   estado: userActivo;
 
   @OneToMany((type) => Product, product => product.user)
-  @JoinColumn()
   products: Product[];
 }

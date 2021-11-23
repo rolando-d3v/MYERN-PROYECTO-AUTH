@@ -32,6 +32,7 @@ app.use("/auth", authRoutes);
 (async () => {
   try {
     const db = await createConnection();
+    //para hacer migracion de las tablas
     // await db.runMigrations()
     return console.log("server db Connected " + db.options.database);
   } catch (err) {

@@ -8,6 +8,7 @@ module.exports = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   synchronize: true,
+  //para hacer migracion de las tablas
   // synchronize: false,
   logging: false,
   entities: [ruta + "/entity/**/*{.ts,.js}"],
