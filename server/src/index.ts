@@ -7,6 +7,7 @@ import config from "./config/config";
 
 //import routes
 import userRoutes from "./api/user/user.routes";
+import productRoutes from "./api/product/product.routes";
 import authRoutes from "./api/auth/auth.routes";
 
 //app server
@@ -24,16 +25,17 @@ app.use(express.urlencoded({ extended: false }));
 
 //routes
 app.use("/user", userRoutes);
+app.use("/product",productRoutes);
 app.use("/auth", authRoutes);
 
 //createconnection es para conectarse al mysql de typeorm
 (async () => {
   try {
     const db = await createConnection();
-    await db.runMigrations()
+    // await db.runMigrations()
     return console.log("server db Connected " + db.options.database);
   } catch (err) {
-    return console.log({ message: "Error: Connectionn", err });
+    return console.log({ msg: "Error: Connectionn", err });
   }
 })();
 
@@ -46,5 +48,5 @@ app.use("/auth", authRoutes);
 //     console.log("server Mysql Connected");
 //   })
 //   .catch((error) => {
-//     console.log({ message: "Error: Connectionn", error });
+//     console.log({ msg: "Error: Connectionn", error });
 //   });

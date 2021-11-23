@@ -1,5 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  JoinColumn,
+} from "typeorm";
 import { Length, IsEmail } from "class-validator";
+import { Product } from "./Product";
 
 ///enum
 export enum userActivo {
@@ -38,7 +45,11 @@ export class User {
   @Column({
     type: "enum",
     enum: userActivo,
-    default: userActivo.true,
+    default: userActivo.false,
   })
   estado: userActivo;
+
+  @OneToMany((type) => Product, product => product.user)
+  @JoinColumn()
+  products: Product[];
 }

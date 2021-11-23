@@ -9,8 +9,10 @@ import bcrypt from "bcryptjs";
 //********************************/
 export const getUsers: RequestHandler = async (req, res) => {
   try {
+    // const user = await getRepository(User).find();
     const user = await getRepository(User).find({
-      select: ["email", "codigo", "estado"],
+      // select: ["email", "codigo", "estado"],
+      relations: ["products"],
     });
     return res.json(user);
   } catch (err) {

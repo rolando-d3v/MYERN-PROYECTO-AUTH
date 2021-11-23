@@ -4,8 +4,11 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { Length } from "class-validator";
+import { User } from './User';
 
 
 export enum estadoActivo {
@@ -36,6 +39,10 @@ export class Product {
     default: estadoActivo.true,
   })
   estado: estadoActivo;
+
+  @ManyToOne(type => User, user => user.products)
+  @JoinColumn()
+  user: User
 
   @CreateDateColumn()
   createdAt: Date;

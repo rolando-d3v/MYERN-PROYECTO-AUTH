@@ -1,4 +1,4 @@
-let ruta = "src";
+let ruta = "dist";
 
 module.exports = {
   type: process.env.DB_DIALECT,
@@ -7,9 +7,9 @@ module.exports = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  // synchronize: true,
-  synchronize: false,
-  // logging: false,
+  synchronize: true,
+  // synchronize: false,
+  logging: false,
   entities: [ruta + "/entity/**/*{.ts,.js}"],
   migrationsTableName: "custom_migration_table",
   migrations: [ruta + "/migration/**/*{.ts,.js}"],
