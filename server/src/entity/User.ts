@@ -3,16 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
-  JoinColumn,
 } from "typeorm";
 import { Length, IsEmail } from "class-validator";
 import { Product } from "./Product";
-
-///enum
-export enum userActivo {
-  true = "true",
-  false = "false",
-}
 
 @Entity()
 export class User {
@@ -44,11 +37,16 @@ export class User {
 
   @Column({
     type: "enum",
-    enum: userActivo,
-    default: userActivo.false,
+    enum: ["true", "false"],
+    default: "false",
   })
-  estado: userActivo;
+  estado: string;
 
-  @OneToMany((type) => Product, product => product.user)
+  @OneToMany((type) => Product, (product) => product.user)
   products: Product[];
+
+  //hace k no return en json el password
+  toJSON() {
+    return { ...this, password: undefined };
+  }
 }
